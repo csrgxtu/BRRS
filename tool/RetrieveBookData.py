@@ -5,6 +5,7 @@
 # File: RetrieveBookData.py
 # Desc: RetrieveBookData will retrieve book text data from 200.20's bookshelf.bookful
 #       catalog, summary, title, tags will be retrieved and put into a csv file.
+# Usage: ./RetrieveBookData.py 0 50000 ../data/50000.csv
 # Date: 18/Feb/2016
 # Produced By BR
 import sys
