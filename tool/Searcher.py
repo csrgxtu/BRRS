@@ -26,7 +26,7 @@ keyword = sys.argv[2]
 ix = open_dir(indexdir)
 
 with ix.searcher() as searcher:
-    query = QueryParser("content", ix.schema).parse(u'思想')
+    query = QueryParser("content", ix.schema).parse(unicode(keyword, 'utf-8'))
     results = searcher.search(query)
     print len(results)
     print results[0]
