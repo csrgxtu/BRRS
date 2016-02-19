@@ -6,7 +6,11 @@
 #
 # Usage: python FlaskServer.py
 # Produced By BR
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
+from whoosh.index import open_dir
+from whoosh.qparser import QueryParser
+from pymongo import MongoClient
+
 
 app = Flask(__name__)
 
@@ -16,7 +20,35 @@ def index():
 
 @app.route('/search/<keyword>')
 def search(keyword):
-    return 'search: ' + keyword
+    isbns = searchHelper(keyword)
+    results = queryBookInfos(isbns[0:10])
+    # print isbns[0 : 10]
+    # return 'search: ' + keyword
+    return jsonify(results=results)
+
+def searchHelper(keyword):
+    ix = open_dir('/home/archer/Documents/Python/BRRS/data/5windexdir/')
+
+    with ix.searcher() as searcher:
+        query = QueryParser("content", ix.schema).parse(keyword)
+        results = searcher.search(query)
+        # print len(results)
+        # print results[0]['isbn']
+        return [result['isbn'] for result in results]
+
+def queryBookInfos(isbns):
+    client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
+    db = client['bookshelf']
+    collection = db['bookful']
+
+    data = []
+    for isbn in isbns:
+        record = collection.find_one({'isbn13': isbn})
+        print record[u'isbn13'], record[u'title'], record[u'image']
+        data.append([record[u'isbn13'], record[u'title'], record[u'image']])
+
+    client.close()
+    return data
 
 if __name__ == '__main__':
     app.debug = True

@@ -9,8 +9,8 @@
 # Produced By BR
 # from whoosh.index import create_in
 from whoosh.index import open_dir
-from whoosh.fields import *
-from jieba.analyse import ChineseAnalyzer
+# from whoosh.fields import *
+# from jieba.analyse import ChineseAnalyzer
 from whoosh.qparser import QueryParser
 import sys
 
