@@ -23,7 +23,7 @@ indexdir = sys.argv[2]
 
 InFile = open(inputfile, 'rt')
 try:
-    schema = Schema(isbn=TEXT(stored=True), content=TEXT(stored=True, analyzer=ChineseAnalyzer()))
+    schema = Schema(isbn=TEXT(stored=True), content=TEXT(analyzer=ChineseAnalyzer()))
     ix = create_in(indexdir, schema)
     writer = ix.writer()
 
