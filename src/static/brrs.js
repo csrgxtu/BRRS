@@ -29,7 +29,7 @@ function resetBody(json) {
   htmlSnippet = '';
 
   for (var i = 0; i < json.results.length; i++) {
-    htmlSnippet += '<img src="' + json.results[i].image + '" alt="..." class="img-rounded">'
+    htmlSnippet += '<img style="margin-top: 5px;" width="144px" height="160px" src="' + json.results[i][2] + '" alt="' + json.results[i][1] +'" class="img-rounded">&nbsp&nbsp'
   }
 
   document.getElementById('booklist').innerHTML = htmlSnippet;

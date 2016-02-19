@@ -21,7 +21,9 @@ def index():
 @app.route('/search/<keyword>')
 def search(keyword):
     isbns = searchHelper(keyword)
-    results = queryBookInfos(isbns[0:10])
+    # print len(isbns)
+    results = queryBookInfos(isbns)
+    # print len(results)
     # print isbns[0 : 10]
     # return 'search: ' + keyword
     return jsonify(results=results)
@@ -31,8 +33,10 @@ def searchHelper(keyword):
 
     with ix.searcher() as searcher:
         query = QueryParser("content", ix.schema).parse(keyword)
-        results = searcher.search(query)
-        # print len(results)
+        results = searcher.search(query, limit=128) # limit here temporary
+        print len(results)
+        for result in results:
+            print result
         # print results[0]['isbn']
         return [result['isbn'] for result in results]
 
@@ -45,7 +49,7 @@ def queryBookInfos(isbns):
     for isbn in isbns:
         record = collection.find_one({'isbn13': isbn})
         print record[u'isbn13'], record[u'title'], record[u'image']
-        data.append([record[u'isbn13'], record[u'title'], record[u'image']])
+        data.append([record[u'isbn13'], record[u'title'], record[u'images'][u'large']])
 
     client.close()
     return data
