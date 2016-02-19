@@ -1,3 +1,4 @@
 unicodecsv
 jieba
 whoosh
+flask
