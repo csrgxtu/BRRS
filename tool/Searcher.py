@@ -7,7 +7,10 @@
 #
 # Usage: ./Searcher.py indexdir keyword
 # Produced By BR
-from whoosh.index import create_in
+# from whoosh.index import create_in
+from whoosh.index import open_dir
+from whoosh.fields import *
+from jieba.analyse import ChineseAnalyzer
 from whoosh.qparser import QueryParser
 import sys
 
@@ -18,11 +21,12 @@ if len(sys.argv) != 3:
 indexdir = sys.argv[1]
 keyword = sys.argv[2]
 
-schema = Schema(isbn=TEXT(stored=True), content=TEXT(stored=True, analyzer=ChineseAnalyzer()))
-ix = create_in(indexdir, schema)
+# schema = Schema(isbn=TEXT(stored=True), content=TEXT(stored=True, analyzer=ChineseAnalyzer()))
+# ix = create_in(indexdir, schema)
+ix = open_dir(indexdir)
 
 with ix.searcher() as searcher:
-    query = QueryParser("content", ix.schema).parse(keyword)
+    query = QueryParser("content", ix.schema).parse(u'思想')
     results = searcher.search(query)
     print len(results)
     print results[0]

@@ -10,6 +10,7 @@
 from whoosh.index import create_in
 from whoosh.fields import *
 from jieba.analyse import ChineseAnalyzer
+from whoosh.qparser import QueryParser
 import unicodecsv as csv
 import sys
 
@@ -30,8 +31,17 @@ try:
     reader = csv.reader(InFile)
     for row in reader:
         print 'Index: ' + row[0]
+        print type(row[1])
         content = row[1] + row[2] + row[3] + row[4]
-        writer.add_document(isbn=row[0], content=content)
+        # print content
+        writer.add_document(isbn=row[0],  content=content)
+
 finally:
     InFile.close()
     writer.commit()
+
+with ix.searcher() as searcher:
+    query = QueryParser("content", ix.schema).parse(u'思想')
+    results = searcher.search(query)
+    print len(results)
+    print results[0]
