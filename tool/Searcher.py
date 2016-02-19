@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# coding=utf8
+#
+# Author: Archer Reilly
+# File: Searcher.py
+# Desc: use woosh to search keyword in the results of Indexer
+#
+# Usage: ./Searcher.py indexdir keyword
+# Produced By BR
+from whoosh.index import create_in
+from whoosh.qparser import QueryParser
+import sys
+
+if len(sys.argv) != 3:
+    print 'Usage: ./Seracher.py indexdir keyword'
+    sys.exit(1)
+
+indexdir = sys.argv[1]
+keyword = sys.argv[2]
+
+schema = Schema(isbn=TEXT(stored=True), content=TEXT(stored=True, analyzer=ChineseAnalyzer()))
+ix = create_in(indexdir, schema)
+
+with ix.searcher() as searcher:
+    query = QueryParser("content", ix.schema).parse(keyword)
+    results = searcher.search(query)
+    print len(results)
+    print results[0]
