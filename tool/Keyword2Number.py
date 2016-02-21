@@ -31,15 +31,30 @@ try:
         KeywordLib.extend(row)
 
     for row in bkreader:
+        print 'Info: ', row[0],
         nrow = []
         nrow.append(row[0])
+
+        tmpLst = [ item.encode('utf8') for item in row[1].split(',')]
         for keyword in KeywordLib:
-            if keyword.encode('utf8') == row[1].split(',')[0].encode('utf8'):
-                print "Debug: ", keyword.encode('utf8')
-                nrow.append(1)
-            else:
+            try:
+                if tmpLst.index(keyword.encode('utf8')) >= 0:
+                    print keyword.encode('utf8'),
+                    nrow.append(1)
+                else:
+                    nrow.append(0)
+            except ValueError:
                 nrow.append(0)
+                pass
+
+        # for keyword in KeywordLib:
+        #     if keyword.encode('utf8') == row[1].split(',')[0].encode('utf8'):
+        #         print "Debug: ", keyword.encode('utf8')
+        #         nrow.append(1)
+        #     else:
+        #         nrow.append(0)
         writer.writerow(nrow)
+        print '.'
         # break
 
 finally:
