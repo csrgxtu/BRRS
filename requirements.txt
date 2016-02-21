@@ -2,3 +2,4 @@ unicodecsv
 jieba
 whoosh
 flask
+scikit-learn
