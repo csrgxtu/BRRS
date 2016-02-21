@@ -29,29 +29,19 @@ try:
     writer = csv.writer(OutFile)
     for row in ukreader:
         KeywordLib.extend(row)
-    # print KeywordLib
 
     for row in bkreader:
-        # print row[1].split(',')
         nrow = []
         nrow.append(row[0])
-        bkeywords = row[1].split(',')
         for keyword in KeywordLib:
-            # if keyword in bkeyword:
-            # print keyword
-            # print type(keyword)
-            # print bkeyword[0]
-            # print type(bkeyword)
-            for bkeyword in bkeywords:
-                if keyword == bkeyword:
-                    nrow.append(1)
-                else:
-                    nrow.append(0)
-            # if bkeyword.index(keyword) >= 0:
-            #     nrow.append(1)
-            # else:
-            #     nrow.append(0)
+            if keyword.encode('utf8') == row[1].split(',')[0].encode('utf8'):
+                print "Debug: ", keyword.encode('utf8')
+                nrow.append(1)
+            else:
+                nrow.append(0)
         writer.writerow(nrow)
+        # break
+
 finally:
     BKFile.close()
     UKFile.close()
