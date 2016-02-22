@@ -28,9 +28,9 @@
     </div> -->
     <center>
       <div class="input-group">
-        <input type="text" id="keyword" class="form-control input-lg" placeholder="请输入关键字" autofocus/>
+        <input type="text" id="keyword" class="form-control input-lg" placeholder="请输入关键字" onkeydown = "if (event.keyCode == 13) document.getElementById('btnSearch').click()" autofocus/>
         <span class="input-group-btn" style="width:0px;"></span>
-        <input type="button" onclick="GetResults()" class="form-control input-lg btn-success" value="搜索" style="margin-left:-2px" />
+        <input type="button" id="btnSearch" onclick="GetResults()" class="form-control input-lg btn-success" value="搜索" style="margin-left:-2px" />
       </div>
     </center>
     <br />
