@@ -3,3 +3,4 @@ jieba
 whoosh
 flask
 scikit-learn
+pymongo
