@@ -22,7 +22,7 @@ def index():
 def search(keyword):
     isbns = searchHelper(keyword)
     # print len(isbns)
-    results = queryBookInfos(isbns)
+    results = queryBookInfos(list(set(isbns)))
     # print len(results)
     # print isbns[0 : 10]
     # return 'search: ' + keyword
