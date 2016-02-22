@@ -50,7 +50,7 @@ def queryBookInfos(isbns):
     data = []
     for isbn in isbns:
         record = collection.find_one({'isbn13': isbn})
-        print record[u'isbn13'], record[u'title'], record[u'image']
+        # print record[u'isbn13'], record[u'title'], record[u'image']
         data.append([record[u'isbn13'], record[u'title'], record[u'images'][u'large']])
 
     client.close()
