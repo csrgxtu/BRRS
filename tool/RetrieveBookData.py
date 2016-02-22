@@ -20,7 +20,9 @@ skip = int(sys.argv[1])
 limit = int(sys.argv[2])
 outputfile = sys.argv[3]
 
-client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
+# client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
+client = MongoClient('mongodb://192.168.100.2/bookshelf')
+
 db = client['bookshelf']
 collection = db['bookful']
 
