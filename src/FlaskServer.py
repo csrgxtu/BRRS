@@ -30,7 +30,7 @@ def search(keyword):
 
 def searchHelper(keyword):
     #ix = open_dir('/home/archer/Documents/Python/BRRS/data/5windexdir/')
-    ix = open_dir('../data/5windexdir/')
+    ix = open_dir('../data/1kindexdir/')
 
     with ix.searcher() as searcher:
         query = QueryParser("content", ix.schema).parse(keyword)
@@ -42,8 +42,8 @@ def searchHelper(keyword):
         return [result['isbn'] for result in results]
 
 def queryBookInfos(isbns):
-    # client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
-    client = MongoClient('mongodb://192.168.100.2/bookshelf')
+    client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
+    # client = MongoClient('mongodb://192.168.100.2/bookshelf')
     db = client['bookshelf']
     collection = db['bookful']
 
