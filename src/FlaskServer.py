@@ -42,7 +42,8 @@ def searchHelper(keyword):
         return [result['isbn'] for result in results]
 
 def queryBookInfos(isbns):
-    client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
+    # client = MongoClient('mongodb://linyy:rioreader@192.168.200.20/bookshelf')
+    client = MongoClient('mongodb://192.168.100.2/bookshelf')
     db = client['bookshelf']
     collection = db['bookful']
 
