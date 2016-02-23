@@ -9,6 +9,7 @@
 from flask import Flask, render_template, jsonify
 from whoosh.index import open_dir
 from whoosh.qparser import QueryParser
+from whoosh import scoring
 from pymongo import MongoClient
 
 
@@ -32,7 +33,7 @@ def searchHelper(keyword):
     #ix = open_dir('/home/archer/Documents/Python/BRRS/data/5windexdir/')
     ix = open_dir('../data/1kindexdir/')
 
-    with ix.searcher() as searcher:
+    with ix.searcher(weighting=scoring.TF_IDF()) as searcher:
         query = QueryParser("content", ix.schema).parse(keyword)
         results = searcher.search(query, limit=128) # limit here temporary
         print len(results)

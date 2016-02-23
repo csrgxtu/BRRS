@@ -12,6 +12,7 @@ from whoosh.index import open_dir
 # from whoosh.fields import *
 # from jieba.analyse import ChineseAnalyzer
 from whoosh.qparser import QueryParser
+from whoosh import scoring
 import sys
 
 if len(sys.argv) != 3:
@@ -25,7 +26,7 @@ keyword = sys.argv[2]
 # ix = create_in(indexdir, schema)
 ix = open_dir(indexdir)
 
-with ix.searcher() as searcher:
+with ix.searcher(weighting=scoring.TF_IDF()) as searcher:
     query = QueryParser("content", ix.schema).parse(unicode(keyword, 'utf-8'))
     results = searcher.search(query)
     print len(results)
