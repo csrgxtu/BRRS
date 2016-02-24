@@ -3,3 +3,5 @@ Python woosh indexer and searcher: https://whoosh.readthedocs.org/en/latest/quic
 Woosh Chinese: http://blog.caoyue.me/post/whoosh-search  https://whoosh.readthedocs.org/en/latest/analysis.html  
 clustering text documents: http://scikit-learn.org/stable/auto_examples/text/document_clustering.html  
 documents clustering with python: http://brandonrose.org/clustering  
+利用python进行识别相似图片（一）: https://segmentfault.com/a/1190000004467183  
+Programming Computer Vision with Python （学习笔记一）：https://segmentfault.com/a/1190000003941588  
