@@ -26,8 +26,13 @@ keyword = sys.argv[2]
 # ix = create_in(indexdir, schema)
 ix = open_dir(indexdir)
 
+# scoring.
 with ix.searcher(weighting=scoring.TF_IDF()) as searcher:
     query = QueryParser("content", ix.schema).parse(unicode(keyword, 'utf-8'))
     results = searcher.search(query)
     print len(results)
     print results[0]
+    print results.score(0)
+
+    print results[1]
+    print results.score(1)
